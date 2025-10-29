@@ -5,13 +5,13 @@ _Un tutoriel pas-à-pas arrive bientôt._
 Il couvrira : installation locale, configuration `.env`, création BDD, lancement du serveur et premiers écrans.
 
 ## Objectifs d’apprentissage
-- Maîtriser le cycle complet d’une application Symfony : conception → développement → tests → déploiement local.
-- Utiliser de façon cohérente les piliers du framework : Security, Forms, Validator et Doctrine.
-- Structurer un domaine métier clair : comptes, jetons, parties, mises et gains.
+- Maîtriser les différents environnements (local, staging, prod)
+- Créer des entités avec leurs propriétées et éxecuter des migrations
+- Créer des formulaires
+- Implémenter un système de sécurité
+- Concevoir une architecture twig propre (base, layout, composants, blocs)
 - Concevoir une architecture extensible facilitant l’ajout de nouveaux jeux.
-- Isoler la logique de jeu dans des services testables (moteur, RNG, calculs).
-- Mettre en place une observabilité minimale (logs, événements, métriques simples).
-- Établir un aspect communautaire via un serveur WebSocket permettant aux joueurs de jouer et de communiquer entre eux.
+- Établir un aspect communautaire via Mercure permettant aux joueurs de jouer et de communiquer entre eux.
 
 ## Roadmap (grandes étapes)
 - Setup projet Symfony propre : arborescence, env (`.env`/`.env.local`), base de données.
