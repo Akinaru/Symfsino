@@ -15,7 +15,9 @@
 
     </head>
     <body style="background-color: grey;">
-        {{ importmap('app') }}
+
         {% block body %}{% endblock %}
+
+        {{ importmap('app') }}
     </body>
 </html>

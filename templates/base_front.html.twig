@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# Header commun (navbar Bootstrap) #}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('app_home') }}">Symfsino</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="mainNav" class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    {# Ajoute d’autres liens front ici si besoin #}
+                </ul>
+
+                <div class="d-flex">
+                    {% if app.user %}
+                        <span class="navbar-text me-3">
+              Bonjour {{ app.user.pseudo ?? app.user.email }}
+            </span>
+                        {# Adapte ces routes si différent chez toi #}
+                        <a class="btn btn-outline-primary me-2" href="{{ path('app_account') }}">Mon compte</a>
+                        <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary me-2" href="{{ path('app_login') }}">Se connecter</a>
+                        <a class="btn btn-primary" href="{{ path('app_register') }}">Créer un compte</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {# Flashs centralisés (success/error) #}
+        {% for msg in app.flashes('success') %}
+            <div class="alert alert-success">{{ msg }}</div>
+        {% endfor %}
+        {% for msg in app.flashes('error') %}
+            <div class="alert alert-danger">{{ msg }}</div>
+        {% endfor %}
+
+        {# Contenu spécifique de chaque page front #}
+
+        {% block page_content %}{% endblock %}
+    </div>
+{% endblock %}
