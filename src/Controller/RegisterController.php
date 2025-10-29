@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
 
 final class RegisterController extends AbstractController
 {
@@ -17,7 +18,8 @@ final class RegisterController extends AbstractController
     public function register(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        Security $security
     ): Response {
         $user = new Utilisateur();
 
@@ -34,7 +36,8 @@ final class RegisterController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', 'Compte créé avec succès. Vous pouvez vous connecter.');
+            $security->login($user);
+
             return $this->redirectToRoute('app_home');
         }
 
