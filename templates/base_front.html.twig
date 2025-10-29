@@ -32,7 +32,7 @@
                             <li><span class="dropdown-item-text"><strong>{{ app.user.email }}</strong></span></li>
                             <li><hr class="dropdown-divider"></li>
                             {# Éléments non cliquables pour l’instant #}
-                            <li><a class="dropdown-item-text">Backoffice</a></li>
+                            <li><a class="dropdown-item-text" href="{{ path("app_dashboard") }}">Backoffice</a></li>
                             <li><a class="dropdown-item-text">Profil</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Se déconnecter</a></li>
