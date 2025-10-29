@@ -3,7 +3,7 @@
 {% block title %}Symfsino - Accueil{% endblock %}
 
 {% block page_content %}
-    <main class="container">
+    <main>
         <h1>Bienvenue</h1>
         <p>Ceci est la page d’accueil. (Contenu à venir.)</p>
 
@@ -29,7 +29,8 @@
                             {{ roles is iterable ? roles|join(', ') : roles }}
                         </dd>
 
-                        <dt class="col-sm-3">Créé le</dt>
+                        <dt class="col-sm-3">Balance</dt>
+                        <dd class="col-sm-9">{{ app.user.balance ?? '0' }}</dd>
                     </dl>
                 </div>
 

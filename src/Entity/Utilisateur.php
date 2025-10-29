@@ -22,6 +22,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $pseudo = null;
 
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
+    private int $balance = 0;
+
     /**
      * @var list<string> The user roles
      */
@@ -59,6 +62,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(?string $pseudo): self
     {
         $this->pseudo = $pseudo;
+        return $this;
+    }
+
+    public function getBalance(): float
+    {
+        return $this->balance / 100;
+    }
+
+    public function setBalance(float $euros): self
+    {
+        $this->balance = (int) round($euros * 100);
         return $this;
     }
 
