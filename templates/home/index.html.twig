@@ -3,14 +3,38 @@
 {% block title %}Symfsino{% endblock %}
 
 {% block page_content %}
-
     <main class="container">
         <h1>Bienvenue</h1>
         <p>Ceci est la page d’accueil. (Contenu à venir.)</p>
 
-        <div>
-            <a href="{{ path('app_login') }}">Se connecter</a>
-            <a href="{{ path('app_register') }}">Créer un compte</a>
-        </div>
+        {% if app.user %}
+            <div class="card my-4">
+                <div class="card-header">
+                    Informations du compte
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Identifiant</dt>
+                        <dd class="col-sm-9">{{ app.user.id }}</dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9">{{ app.user.email }}</dd>
+
+                        <dt class="col-sm-3">Pseudo</dt>
+                        <dd class="col-sm-9">{{ app.user.pseudo ?? '—' }}</dd>
+
+                        <dt class="col-sm-3">Rôles</dt>
+                        <dd class="col-sm-9">
+                            {% set roles = app.user.roles|default([]) %}
+                            {{ roles is iterable ? roles|join(', ') : roles }}
+                        </dd>
+
+                        <dt class="col-sm-3">Créé le</dt>
+                    </dl>
+                </div>
+
+            </div>
+        {% endif %}
+
     </main>
 {% endblock %}
