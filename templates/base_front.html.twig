@@ -2,39 +2,51 @@
 
 {% block body %}
     {# Header commun (navbar Bootstrap) #}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-3">
+    <header class="p-3 mb-3 border-bottom bg-white">
         <div class="container">
-            <a class="navbar-brand" href="{{ path('app_home') }}">Symfsino</a>
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                {# Logo / marque (non cliquable pour l’instant) #}
+                <span class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none fs-5 fw-bold">
+                    Symfsino
+                  </span>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div id="mainNav" class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto">
+                {# Liens de navigation (non cliquables pour l’instant) #}
+                <ul class="nav me-auto mb-2 mb-lg-0 ms-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                        <span class="nav-link px-2 link-dark">Accueil</span>
                     </li>
-                    {# Ajoute d’autres liens front ici si besoin #}
                 </ul>
 
-                <div class="d-flex">
-                    {% if app.user %}
-                        <span class="navbar-text me-3">
-              Bonjour {{ app.user.pseudo ?? app.user.email }}
-            </span>
-                        {# Adapte ces routes si différent chez toi #}
-                        <a class="btn btn-outline-primary me-2">Mon compte</a>
-                        <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">Se déconnecter</a>
-                    {% else %}
-                        <a class="btn btn-outline-primary me-2" href="{{ path('app_login') }}">Se connecter</a>
-                        <a class="btn btn-primary" href="{{ path('app_register') }}">Créer un compte</a>
-                    {% endif %}
-                </div>
+                {# Zone compte #}
+                {% if app.user %}
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-inline-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://i.pinimg.com/1200x/54/f4/b5/54f4b55a59ff9ddf2a2655c7f35e4356.jpg" alt="avatar" width="32" height="32" class="rounded-circle me-2">
+                            <span class="me-2">{{ app.user.pseudo ?? app.user.email }}</span>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <span class="badge bg-danger">Admin</span>
+                            {% endif %}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser1">
+                            <li><span class="dropdown-item-text"><strong>{{ app.user.email }}</strong></span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            {# Éléments non cliquables pour l’instant #}
+                            <li><a class="dropdown-item-text">Backoffice</a></li>
+                            <li><a class="dropdown-item-text">Profil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-primary" type="button" href="{{ path("app_login") }}">Se connecter</a>
+                        <a class="btn btn-primary" type="button" href="{{  path("app_register") }}">Créer un compte</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
-    </nav>
+    </header>
 
     <div class="container">
         {# Flashs centralisés (success/error) #}
